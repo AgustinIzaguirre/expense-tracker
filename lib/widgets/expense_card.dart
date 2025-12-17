@@ -7,38 +7,49 @@ class ExpenseCard extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-      Expense expense = Expense("\$100", "Burger King", "Visa Credito", "Rappi",  "1/1/2025");
+      Expense expense = Expense("100", "Burger King", "Visa Credito", "Rappi",  "1/1/2025");
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Text(expense.amount, 
-         style: TextStyle(
-          fontSize: 14.0, // Makes the text bigger (adjust the value as needed)
-          fontWeight: FontWeight.bold, // Makes the text bold
-          ),
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                  child: Text(expense.cathegory.characters.first.toUpperCase()),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    expense.description,
+                    style: Theme.of(context).textTheme.titleMedium,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  '\$${expense.amount}',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                Chip(label: Text(expense.cathegory)),
+                Chip(label: Text(expense.paymentMethod)),
+                Chip(label: Text(expense.date)),
+              ],
+            ),
+            const SizedBox(height: 6),
+          ],
         ),
-        Text(expense.description,
-         style: TextStyle(
-          fontSize: 14.0, // Makes the text bigger (adjust the value as needed)
-          fontWeight: FontWeight.bold, // Makes the text bold
-          ),),
-        Text(expense.paymentMethod,
-         style: TextStyle(
-          fontSize: 14.0, // Makes the text bigger (adjust the value as needed)
-          fontWeight: FontWeight.bold, // Makes the text bold
-          ),),
-        Text(expense.cathegory,
-         style: TextStyle(
-          fontSize: 14.0, // Makes the text bigger (adjust the value as needed)
-          fontWeight: FontWeight.bold, // Makes the text bold
-          ),),
-        Text(expense.date,
-         style: TextStyle(
-          fontSize: 14.0, // Makes the text bigger (adjust the value as needed)
-          fontWeight: FontWeight.bold, // Makes the text bold
-          ),),
-      ]
-      );
+      ),
+    );
   }
 }
