@@ -1,0 +1,1 @@
+enum GroupBy { category, paymentMethod }

@@ -2,12 +2,13 @@ import 'package:expense_tracker/models/Expense.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseCard extends StatelessWidget {
-  const ExpenseCard({super.key});
+  final Expense expense;
 
-  // This widget is the root of your application.
+  const ExpenseCard({super.key, required this.expense});
+
   @override
   Widget build(BuildContext context) {
-      Expense expense = Expense("100", "Burger King", "Visa Credito", "Rappi",  "1/1/2025");
+      //Expense expense = Expense("100", "Burger King", "Visa Credito", "Rappi",  "1/1/2025");
 
     return Card(
       child: Padding(
@@ -18,7 +19,7 @@ class ExpenseCard extends StatelessWidget {
             Row(
               children: [
                 CircleAvatar(
-                  child: Text(expense.cathegory.characters.first.toUpperCase()),
+                  child: Text(expense.cathegory.name.characters.first.toUpperCase()),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -41,9 +42,9 @@ class ExpenseCard extends StatelessWidget {
               spacing: 8,
               runSpacing: 8,
               children: [
-                Chip(label: Text(expense.cathegory)),
-                Chip(label: Text(expense.paymentMethod)),
-                Chip(label: Text(expense.date)),
+                Chip(label: Text(expense.cathegory.name)),
+                Chip(label: Text(expense.paymentMethod.name)),
+                Chip(label: Text(_formatDate(expense.date))),
               ],
             ),
             const SizedBox(height: 6),
@@ -52,4 +53,8 @@ class ExpenseCard extends StatelessWidget {
       ),
     );
   }
+
+  static String _formatDate(DateTime d) =>
+      '${d.day.toString().padLeft(2, '0')}/${d.month.toString().padLeft(2, '0')}/${d.year} '
+      '${d.hour.toString().padLeft(2, '0')}:${d.minute.toString().padLeft(2, '0')}';
 }

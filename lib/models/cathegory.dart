@@ -1,5 +1,5 @@
-class Category {
+class Cathegory {
   final int id;
   final String name;
-  const Category({required this.id, required this.name});
+  const Cathegory({required this.id, required this.name});
 }
