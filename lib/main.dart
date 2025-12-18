@@ -217,8 +217,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   const methods = [
     PaymentMethod(id: 1, name: 'Efectivo'),
-    PaymentMethod(id: 2, name: 'Débito'),
-    PaymentMethod(id: 3, name: 'Crédito'),
+    PaymentMethod(id: 2, name: 'Débito Visa'),
+    PaymentMethod(id: 3, name: 'Crédito Master Card'),
+    PaymentMethod(id: 3, name: 'Crédito Visa'),
     PaymentMethod(id: 4, name: 'Mercado Pago'),
   ];
 
@@ -232,6 +233,7 @@ class _MyHomePageState extends State<MyHomePage> {
     methods[(i + 1) % methods.length],
     categories[i % categories.length],
     now.subtract(Duration(days: rnd.nextInt(45))),
+    "ARS"
     );
   });
   }

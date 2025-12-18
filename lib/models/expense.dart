@@ -7,7 +7,8 @@ class Expense {
   final PaymentMethod paymentMethod;
   final Cathegory cathegory;
   final DateTime date;
+  final String currency;
 
-  const Expense(this.amount, this.description, this.paymentMethod, this.cathegory, this.date);
+  const Expense(this.amount, this.description, this.paymentMethod, this.cathegory, this.date, this.currency);
 
 }

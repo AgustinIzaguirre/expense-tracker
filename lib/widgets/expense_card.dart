@@ -44,6 +44,7 @@ class ExpenseCard extends StatelessWidget {
               children: [
                 Chip(label: Text(expense.cathegory.name)),
                 Chip(label: Text(expense.paymentMethod.name)),
+                Chip(label: Text(expense.currency)),
                 Chip(label: Text(_formatDate(expense.date))),
               ],
             ),
