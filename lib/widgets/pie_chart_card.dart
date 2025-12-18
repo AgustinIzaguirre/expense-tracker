@@ -2,9 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'expenses_legend.dart';
 
+const pieColors = [
+  Color(0xFF4CAF50), // verde
+  Color(0xFF2196F3), // azul
+  Color(0xFFFFC107), // amarillo
+  Color(0xFFF44336), // rojo
+  Color(0xFF9C27B0), // violeta
+  Color(0xFF009688), // teal
+];
+
 class PieChartCard extends StatelessWidget {
   final String title;
   final Map<String, double> totals;
+
 
   const PieChartCard({
     super.key,
@@ -25,19 +35,27 @@ class PieChartCard extends StatelessWidget {
         entries.skip(maxSlices).fold<double>(0, (a, e) => a + e.value);
 
     final sections = <PieChartSectionData>[
-      for (final e in displayed)
+      for (int i = 0; i < displayed.length; i++)
         PieChartSectionData(
-          value: e.value,
-          title: '${_pct(e.value, totalAmount)}%',
+          value: displayed[i].value,
+          title: '${_pct(displayed[i].value, totalAmount)}%',
           radius: 55,
-          titleStyle: Theme.of(context).textTheme.labelMedium,
+          color: pieColors[i % pieColors.length],
+          titleStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
         ),
       if (othersSum > 0)
         PieChartSectionData(
           value: othersSum,
           title: '${_pct(othersSum, totalAmount)}%',
           radius: 55,
-          titleStyle: Theme.of(context).textTheme.labelMedium,
+          color: pieColors[displayed.length % pieColors.length],
+          titleStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
         ),
     ];
 
