@@ -1,13 +1,13 @@
 import 'package:expense_tracker/models/group_by.dart';
 import 'package:flutter/material.dart';
 
-class HomeHeader extends StatelessWidget {
+class ExpensesHeader extends StatelessWidget {
   final DateTimeRange range;
   final GroupBy groupBy;
   final VoidCallback onPickRange;
   final ValueChanged<GroupBy> onChangeGroupBy;
 
-  const HomeHeader({
+  const ExpensesHeader({
     super.key,
     required this.range,
     required this.groupBy,
@@ -25,7 +25,7 @@ class HomeHeader extends StatelessWidget {
             child: OutlinedButton.icon(
               onPressed: onPickRange,
               icon: const Icon(Icons.date_range),
-              label: Text('${_fmt(range.start)} - ${_fmt(range.end)}'),
+              label: Text('${_formatDate(range.start)} - ${_formatDate(range.end)}'),
             ),
           ),
           const SizedBox(width: 12),
@@ -50,6 +50,6 @@ class HomeHeader extends StatelessWidget {
     );
   }
 
-  static String _fmt(DateTime d) =>
+  static String _formatDate(DateTime d) =>
       '${d.day.toString().padLeft(2, '0')}/${d.month.toString().padLeft(2, '0')}/${d.year}';
 }

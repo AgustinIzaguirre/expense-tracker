@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'expenses_legend.dart';
+import 'pie_chart_legend.dart';
 
 const pieColors = [
   Color(0xFF4CAF50), // verde
@@ -14,7 +14,6 @@ const pieColors = [
 class PieChartCard extends StatelessWidget {
   final String title;
   final Map<String, double> totals;
-
 
   const PieChartCard({
     super.key,
@@ -38,7 +37,7 @@ class PieChartCard extends StatelessWidget {
       for (int i = 0; i < displayed.length; i++)
         PieChartSectionData(
           value: displayed[i].value,
-          title: '${_pct(displayed[i].value, totalAmount)}%',
+          title: '${_calculatePercentage(displayed[i].value, totalAmount)}%',
           radius: 55,
           color: pieColors[i % pieColors.length],
           titleStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
@@ -49,7 +48,7 @@ class PieChartCard extends StatelessWidget {
       if (othersSum > 0)
         PieChartSectionData(
           value: othersSum,
-          title: '${_pct(othersSum, totalAmount)}%',
+          title: '${_calculatePercentage(othersSum, totalAmount)}%',
           radius: 55,
           color: pieColors[displayed.length % pieColors.length],
           titleStyle: Theme.of(context).textTheme.labelMedium?.copyWith(
@@ -85,7 +84,7 @@ class PieChartCard extends StatelessWidget {
                   const SizedBox(width: 12),
                   SizedBox(
                     width: 160,
-                    child: ExpensesLegend(
+                    child: PieChartLegend(
                       displayed: displayed,
                       othersSum: othersSum,
                       total: totalAmount,
@@ -105,6 +104,6 @@ class PieChartCard extends StatelessWidget {
     );
   }
 
-  static int _pct(double value, double total) =>
+  static int _calculatePercentage(double value, double total) =>
       total <= 0 ? 0 : ((value / total) * 100).round();
 }

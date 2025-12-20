@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ExpensesLegend extends StatelessWidget {
+class PieChartLegend extends StatelessWidget {
   final List<MapEntry<String, double>> displayed;
   final double othersSum;
   final double total;
 
-  const ExpensesLegend({
+  const PieChartLegend({
     super.key,
     required this.displayed,
     required this.othersSum,
