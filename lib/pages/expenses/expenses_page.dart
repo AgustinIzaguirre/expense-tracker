@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:expense_tracker/models/Expense.dart';
-import 'package:expense_tracker/models/cathegory.dart';
+import 'package:expense_tracker/models/category.dart';
 import 'package:expense_tracker/models/group_by.dart';
 import 'package:expense_tracker/models/payment_method.dart';
 import 'package:expense_tracker/pages/expenses/expenses_appbar.dart';
@@ -113,7 +113,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
     final map = <String, double>{};
     for (final e in _filteredAll) {
       final key =
-          _groupBy == GroupBy.category ? e.cathegory.name : e.paymentMethod.name;
+          _groupBy == GroupBy.category ? e.category.name : e.paymentMethod.name;
       map[key] = (map[key] ?? 0) + parseAmount(e.amount);
     }
     return map;
@@ -200,10 +200,10 @@ class _ExpensesPageState extends State<ExpensesPage> {
 
   List<Expense> buildMockExpenses({int total = 60}) {
   const categories = [
-    Cathegory(id: 1, name: 'Comida'),
-    Cathegory(id: 2, name: 'Transporte'),
-    Cathegory(id: 3, name: 'Salud'),
-    Cathegory(id: 4, name: 'Hogar'),
+    Category(id: 1, name: 'Comida'),
+    Category(id: 2, name: 'Transporte'),
+    Category(id: 3, name: 'Salud'),
+    Category(id: 4, name: 'Hogar'),
   ];
 
   const methods = [
