@@ -1,0 +1,12 @@
+Estoy haciendo un expense tracker en flutter el cual tiene las siguientes entidades:
+* Payment method (id, name)
+* Cathegory(id, name)
+* Expense(id, amount, description, cathegory, payment method, date)
+
+Quiero que en la pantalla principal se muestre arriba de todo un filtro para elegir intervalos de fechas,
+ abajo un piechart que por default muestra las expensas por categoria pero permite tambien cambiarle el filtro a medio de pago.
+
+Abajo de eso un scroll infinito de cards de expenses.
+como armarias esa pantalla, tambien tenes la libertad de armar la card de expenses como pienses que sea mejor, deben mostrarse todos los atributos de la expense.
+
+Cualquier duda que tengas decime.
