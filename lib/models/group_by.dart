@@ -1,1 +1,1 @@
-enum GroupBy { category, paymentMethod }
+enum GroupBy { category, paymentMethod, currency }

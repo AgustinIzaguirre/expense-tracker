@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:expense_tracker/models/Expense.dart';
 import 'package:expense_tracker/models/category.dart';
+import 'package:expense_tracker/models/currency.dart';
 import 'package:expense_tracker/models/group_by.dart';
 import 'package:expense_tracker/models/payment_method.dart';
 import 'package:expense_tracker/pages/expenses/expenses_appbar.dart';
@@ -139,6 +140,8 @@ class _ExpensesPageState extends State<ExpensesPage> {
 
   @override
   Widget build(BuildContext context) {
+    Currency currency = Currency.ars;
+
     return Scaffold(
       appBar: ExpensesAppBar(onAddPressed: () {
           // TODO: navegar a CreateExpense
@@ -152,8 +155,13 @@ class _ExpensesPageState extends State<ExpensesPage> {
             child: ExpensesHeader(
               range: _range,
               groupBy: _groupBy,
+              currency: currency,
               onPickRange: _pickRange,
               onChangeGroupBy: (v) => setState(() => _groupBy = v),
+              onChangeCurrency: (c) {
+                setState(() => currency = c);
+                // más adelante: refrescar lista / recalcular pie
+              },
             ),
           ),
           SliverToBoxAdapter(

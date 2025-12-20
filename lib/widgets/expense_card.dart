@@ -8,7 +8,6 @@ class ExpenseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      //Expense expense = Expense("100", "Burger King", "Visa Credito", "Rappi",  "1/1/2025");
 
     return Card(
       child: Padding(
