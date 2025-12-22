@@ -1,7 +1,6 @@
 import 'package:expense_tracker/mappers/category_mapper.dart';
 import 'package:expense_tracker/models/category.dart';
 import 'package:expense_tracker/daos/category.dart' as dao;
-import 'package:expense_tracker/pages/categories/categories_mock.dart';
 import 'package:expense_tracker/pages/categories/category_card.dart';
 import 'package:expense_tracker/repositories/isar_categories_repository.dart';
 import 'package:expense_tracker/widgets/bottom_nav_bar.dart';
