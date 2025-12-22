@@ -7,8 +7,9 @@ import 'package:expense_tracker/models/group_by.dart';
 import 'package:expense_tracker/models/payment_method.dart';
 import 'package:expense_tracker/pages/expenses/expenses_appbar.dart';
 import 'package:expense_tracker/widgets/bottom_nav_bar.dart';
-import 'package:expense_tracker/widgets/expense_card.dart';
+import 'package:expense_tracker/pages/expenses/expense_card.dart';
 import 'package:expense_tracker/pages/expenses/expenses_header.dart';
+import 'package:expense_tracker/widgets/expense_tracker_app_bar.dart';
 import 'package:expense_tracker/widgets/pie_chart/pie_chart_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -24,6 +25,9 @@ class ExpensesPage extends StatefulWidget {
 }
 
 class _ExpensesPageState extends State<ExpensesPage> {
+  static const String EXPENSES_TITLE = "Expenses";
+  static const String EXPENSES_TOOLTIP = "Create expense";
+  
   final _scrollController = ScrollController();
   BottomNavItem _currentTab = BottomNavItem.expenses;
 
@@ -143,10 +147,12 @@ class _ExpensesPageState extends State<ExpensesPage> {
     Currency currency = Currency.ars;
 
     return Scaffold(
-      appBar: ExpensesAppBar(onAddPressed: () {
+      appBar: ExpenseTrackerAppBar(onAddPressed: () {
           // TODO: navegar a CreateExpense
           // Navigator.push(...)
         },
+        title: EXPENSES_TITLE,
+        tooltip: EXPENSES_TOOLTIP,
       ),
       body: CustomScrollView(
         controller: _scrollController,

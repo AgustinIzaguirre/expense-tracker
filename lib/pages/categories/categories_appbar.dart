@@ -18,7 +18,7 @@ class ExpensesAppBar extends StatelessWidget implements PreferredSizeWidget {
       foregroundColor: Colors.white,
       elevation: 2,
       title: const Text(
-        'Expenses',
+        'Categories',
         style: TextStyle(
           fontWeight: FontWeight.w600,
         ),
@@ -26,7 +26,7 @@ class ExpensesAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
           icon: const Icon(Icons.add),
-          tooltip: 'Agregar gasto',
+          tooltip: 'Add Category',
           onPressed: onAddPressed,
         ),
       ],
