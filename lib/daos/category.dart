@@ -9,7 +9,6 @@ class Category {
 
   late String name;
 
-  // Serializable (lo que elegirá el usuario)
   late int iconCodePoint;
   late String iconFontFamily;
 

@@ -1,5 +1,7 @@
-import 'package:expense_tracker/models/category.dart';
+import 'package:expense_tracker/daos/category.dart';
+import 'package:expense_tracker/mappers/category_mapper.dart';
 import 'package:expense_tracker/pages/categories/icon_picker_botomsheet.dart';
+import 'package:expense_tracker/repositories/isar_categories_repository.dart';
 import 'package:flutter/material.dart';
 
 class CreateCategoryPage extends StatefulWidget {
@@ -14,6 +16,9 @@ class _CreateCategoryPageState extends State<CreateCategoryPage> {
   final _nameCtrl = TextEditingController();
 
   IconData _selectedIcon = Icons.category;
+
+  final _repository = IsarCategoriesRepository();
+
 
   @override
   void dispose() {
@@ -30,18 +35,23 @@ class _CreateCategoryPageState extends State<CreateCategoryPage> {
     setState(() => _selectedIcon = picked);
   }
 
-  void _save() {
-    if (!(_formKey.currentState?.validate() ?? false)) return;
+  Future<void> _save() async {
+  final name = _nameCtrl.text.trim();
+  if (name.isEmpty) return;
 
-    final category = Category(
-      id: DateTime.now().millisecondsSinceEpoch, // mock id (después Isar)
-      name: _nameCtrl.text.trim(),
-      iconCodePoint: _selectedIcon.codePoint,
-      iconFontFamily: _selectedIcon.fontFamily ?? 'MaterialIcons',
-    );
+  final category = Category()
+    ..name = name
+    ..iconCodePoint = _selectedIcon.codePoint
+    ..iconFontFamily = _selectedIcon.fontFamily ?? 'MaterialIcons';
 
-    Navigator.pop(context, category);
-  }
+  final id = await _repository.create(category);
+
+  // Para confirmar rápido que guardó:
+  debugPrint('Category guardada con id: $id');
+
+  // Volvés a la pantalla anterior
+  Navigator.pop(context, category.toModel());
+}
 
   @override
   Widget build(BuildContext context) {
