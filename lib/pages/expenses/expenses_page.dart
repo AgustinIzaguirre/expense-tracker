@@ -8,7 +8,6 @@ import 'package:expense_tracker/models/payment_method.dart';
 import 'package:expense_tracker/widgets/bottom_nav_bar.dart';
 import 'package:expense_tracker/pages/expenses/expense_card.dart';
 import 'package:expense_tracker/pages/expenses/expenses_header.dart';
-import 'package:expense_tracker/widgets/expense_tracker_app_bar.dart';
 import 'package:expense_tracker/widgets/pie_chart/pie_chart_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -192,11 +191,31 @@ class _ExpensesPageState extends State<ExpensesPage> {
   }
 
   List<Expense> buildMockExpenses({int total = 60}) {
-  const categories = [
-    Category(id: 1, name: 'Comida'),
-    Category(id: 2, name: 'Transporte'),
-    Category(id: 3, name: 'Salud'),
-    Category(id: 4, name: 'Hogar'),
+  var categories = [
+   Category(
+    id: 1,
+    name: 'Comida',
+    iconCodePoint: Icons.restaurant.codePoint,
+    iconFontFamily: Icons.restaurant.fontFamily!,
+  ),
+  Category(
+    id: 2,
+    name: 'Transporte',
+    iconCodePoint: Icons.directions_bus.codePoint,
+    iconFontFamily: Icons.directions_bus.fontFamily!,
+  ),
+  Category(
+    id: 3,
+    name: 'Salud',
+    iconCodePoint: Icons.medical_services.codePoint,
+    iconFontFamily: Icons.medical_services.fontFamily!,
+  ),
+  Category(
+    id: 4,
+    name: 'Hogar',
+    iconCodePoint: Icons.home.codePoint,
+    iconFontFamily: Icons.home.fontFamily!,
+  ),
   ];
 
   const methods = [

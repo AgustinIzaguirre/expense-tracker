@@ -1,3 +1,5 @@
+import 'package:expense_tracker/pages/categories/categories_mock.dart';
+import 'package:expense_tracker/pages/categories/category_card.dart';
 import 'package:expense_tracker/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +19,19 @@ class _CategoriesPageState extends State<CategoriesPage> {
 
   @override
   Widget build(BuildContext context) {
-   return SizedBox(width: 10,);
+   return ListView.separated(
+      padding: const EdgeInsets.all(16),
+      itemCount: mockCategories.length,
+      separatorBuilder: (_, __) => const SizedBox(height: 8),
+      itemBuilder: (context, index) {
+        final category = mockCategories[index];
+        return CategoryCard(
+          category: category,
+          onTap: () {
+            // TODO: editar categoría (más adelante)
+          },
+        );
+      },
+    );
   }
 }

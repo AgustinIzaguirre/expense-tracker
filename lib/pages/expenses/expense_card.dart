@@ -18,7 +18,11 @@ class ExpenseCard extends StatelessWidget {
             Row(
               children: [
                 CircleAvatar(
-                  child: Text(expense.category.name.characters.first.toUpperCase()),
+                  backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                  child: Icon(
+                    expense.category.icon,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
