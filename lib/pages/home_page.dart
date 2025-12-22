@@ -1,6 +1,8 @@
 
+import 'package:expense_tracker/models/category.dart';
 import 'package:expense_tracker/models/currency.dart';
 import 'package:expense_tracker/pages/categories/categories_page.dart';
+import 'package:expense_tracker/pages/categories/create_category_page.dart';
 import 'package:expense_tracker/pages/payment_methods/payment_methods_page.dart';
 import 'package:expense_tracker/widgets/bottom_nav_bar.dart';
 import 'package:expense_tracker/widgets/expense_tracker_app_bar.dart';
@@ -55,6 +57,22 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  Future<void> _openCreateCategory() async {
+    final created = await Navigator.push<Category>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const CreateCategoryPage(),
+      ),
+    );
+
+    if (created == null) return;
+
+    // Lo ideal después es:
+    // - guardarlo en Isar
+    // - refrescar CategoriesPage
+    debugPrint('Nueva categoría creada: ${created.name}');
+  }
+
   PreferredSizeWidget _buildAppBar() {
     switch (_currentTab) {
       case BottomNavItem.expenses:
@@ -74,10 +92,7 @@ class _HomePageState extends State<HomePage> {
           tooltip: PAYMENT_METHODS_TOOLTIP,
         );
       case BottomNavItem.categories:
-        return  ExpenseTrackerAppBar(onAddPressed: () {
-            // TODO: navegar a CreateExpense
-            // Navigator.push(...)
-          },
+        return  ExpenseTrackerAppBar(onAddPressed: _openCreateCategory,
           title: CATEGORIES_TITLE,
           tooltip: CATEGORIES_TOOLTIP,
         );
