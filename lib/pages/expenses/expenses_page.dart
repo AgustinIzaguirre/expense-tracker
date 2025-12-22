@@ -5,7 +5,6 @@ import 'package:expense_tracker/models/category.dart';
 import 'package:expense_tracker/models/currency.dart';
 import 'package:expense_tracker/models/group_by.dart';
 import 'package:expense_tracker/models/payment_method.dart';
-import 'package:expense_tracker/pages/expenses/expenses_appbar.dart';
 import 'package:expense_tracker/widgets/bottom_nav_bar.dart';
 import 'package:expense_tracker/pages/expenses/expense_card.dart';
 import 'package:expense_tracker/pages/expenses/expenses_header.dart';
@@ -15,19 +14,14 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ExpensesPage extends StatefulWidget {
-  const ExpensesPage({super.key, required this.title});
-
-
-  final String title;
+  const ExpensesPage({super.key});
 
   @override
   State<ExpensesPage> createState() => _ExpensesPageState();
 }
 
 class _ExpensesPageState extends State<ExpensesPage> {
-  static const String EXPENSES_TITLE = "Expenses";
-  static const String EXPENSES_TOOLTIP = "Create expense";
-  
+
   final _scrollController = ScrollController();
   BottomNavItem _currentTab = BottomNavItem.expenses;
 
@@ -146,15 +140,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
   Widget build(BuildContext context) {
     Currency currency = Currency.ars;
 
-    return Scaffold(
-      appBar: ExpenseTrackerAppBar(onAddPressed: () {
-          // TODO: navegar a CreateExpense
-          // Navigator.push(...)
-        },
-        title: EXPENSES_TITLE,
-        tooltip: EXPENSES_TOOLTIP,
-      ),
-      body: CustomScrollView(
+    return CustomScrollView(
         controller: _scrollController,
         slivers: [
           SliverToBoxAdapter(
@@ -202,14 +188,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: AppBottomNavBar(
-        current: _currentTab,
-        onTap: (tab) {
-          setState(() => _currentTab = tab);
-        },
-      ),
-    );
+      );
   }
 
   List<Expense> buildMockExpenses({int total = 60}) {
