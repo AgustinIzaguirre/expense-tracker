@@ -1,8 +1,8 @@
 
 import 'package:expense_tracker/data/seeds/isar_categories_seed.dart';
 import 'package:expense_tracker/infraestructure/isar_instance.dart';
-import 'package:expense_tracker/pages/expenses/expenses_page.dart';
 import 'package:expense_tracker/pages/home_page.dart';
+import 'package:expense_tracker/repositories/isar_categories_repository.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {

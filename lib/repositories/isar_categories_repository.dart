@@ -16,4 +16,12 @@ class IsarCategoriesRepository {
     final isar = IsarInstance.isar;
     return isar.categorys.where().sortByName().findAll();
   }
+
+  Future<void> deleteAll() async {
+    final isar = IsarInstance.isar;
+
+    await isar.writeTxn(() async {
+      await isar.categorys.clear(); // borra todo de la colección
+    });
+  }
 }

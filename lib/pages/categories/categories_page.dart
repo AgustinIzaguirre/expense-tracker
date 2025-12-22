@@ -6,6 +6,7 @@ import 'package:expense_tracker/pages/categories/category_card.dart';
 import 'package:expense_tracker/repositories/isar_categories_repository.dart';
 import 'package:expense_tracker/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class CategoriesPage extends StatefulWidget {
 
@@ -86,11 +87,28 @@ class _CategoriesPageState extends State<CategoriesPage> {
             separatorBuilder: (_, __) => const SizedBox(height: 8),
             itemBuilder: (context, index) {
               final c = categories[index]; // model.Category
-              return CategoryCard(
-                category: c,
-                onTap: () {
-                  // TODO: editar categoría
-                },
+              return Slidable(
+                key: ValueKey(c.id),
+                endActionPane: ActionPane(
+                  motion: const DrawerMotion(),
+                  children: [
+                    SlidableAction(
+                      onPressed: (_) {
+                        debugPrint('Borrar category id=${c.id}');
+                      },
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.white,
+                      icon: Icons.delete,
+                      label: 'Delete',
+                    ),
+                  ],
+                ),
+                child: CategoryCard(
+                  category: c,
+                  onTap: () {
+                    // editar category
+                  },
+                ),
               );
             },
           ),
