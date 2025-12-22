@@ -13,10 +13,10 @@ class CategoriesPage extends StatefulWidget {
   const CategoriesPage({super.key});
 
   @override
-  State<CategoriesPage> createState() => _CategoriesPageState();
+  State<CategoriesPage> createState() => CategoriesPageState();
 }
 
-class _CategoriesPageState extends State<CategoriesPage> {
+class CategoriesPageState extends State<CategoriesPage> {
   static const String CATEGORIES_TITLE = "Categories";
   static const String CATEGORIES_TOOLTIP = "Create category";
   
@@ -38,7 +38,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
         .toList();
   }
 
-  Future<void> _refresh() async {
+  Future<void> refresh() async {
     setState(() {
       _futureCategories = _load();
     });
@@ -68,7 +68,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
 
         if (categories.isEmpty) {
           return RefreshIndicator(
-            onRefresh: _refresh,
+            onRefresh: refresh,
             child: ListView(
               padding: const EdgeInsets.all(16),
               children: const [
@@ -80,7 +80,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
         }
 
         return RefreshIndicator(
-          onRefresh: _refresh,
+          onRefresh: refresh,
           child: ListView.separated(
             padding: const EdgeInsets.all(16),
             itemCount: categories.length,

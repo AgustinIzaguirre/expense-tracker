@@ -28,6 +28,8 @@ class _HomePageState extends State<HomePage> {
   static const String PAYMENT_METHODS_TOOLTIP = "Create payment method";
   
   BottomNavItem _currentTab = BottomNavItem.expenses;
+  final GlobalKey<CategoriesPageState> _categoriesKey = GlobalKey<CategoriesPageState>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,7 @@ class _HomePageState extends State<HomePage> {
       case BottomNavItem.paymentMethods:
         return const PaymentMethodsPage();
       case BottomNavItem.categories:
-        return const CategoriesPage();
+        return CategoriesPage(key: _categoriesKey);
     }
   }
 
@@ -64,6 +66,8 @@ class _HomePageState extends State<HomePage> {
         builder: (_) => const CreateCategoryPage(),
       ),
     );
+    
+    _categoriesKey.currentState?.refresh();
 
     if (created == null) return;
 
