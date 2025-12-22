@@ -24,4 +24,12 @@ class IsarCategoriesRepository {
       await isar.categorys.clear(); // borra todo de la colección
     });
   }
+
+  Future<bool> deleteById(int id) async {
+    final isar = IsarInstance.isar;
+
+    return isar.writeTxn(() async {
+      return isar.categorys.delete(id);
+    });
+  }
 }

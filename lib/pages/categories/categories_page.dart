@@ -93,8 +93,9 @@ class CategoriesPageState extends State<CategoriesPage> {
                   motion: const DrawerMotion(),
                   children: [
                     SlidableAction(
-                      onPressed: (_) {
-                        debugPrint('Borrar category id=${c.id}');
+                      onPressed: (_) async {
+                        await _repository.deleteById(c.id);
+                        await refresh();
                       },
                       backgroundColor: Colors.red,
                       foregroundColor: Colors.white,
