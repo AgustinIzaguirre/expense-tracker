@@ -1,28 +1,26 @@
 import 'dart:math';
 
 import 'package:expense_tracker/models/Expense.dart';
-import 'package:expense_tracker/models/cathegory.dart';
+import 'package:expense_tracker/models/category.dart';
+import 'package:expense_tracker/models/currency.dart';
 import 'package:expense_tracker/models/group_by.dart';
 import 'package:expense_tracker/models/payment_method.dart';
-import 'package:expense_tracker/pages/expenses/expenses_appbar.dart';
 import 'package:expense_tracker/widgets/bottom_nav_bar.dart';
-import 'package:expense_tracker/widgets/expense_card.dart';
+import 'package:expense_tracker/pages/expenses/expense_card.dart';
 import 'package:expense_tracker/pages/expenses/expenses_header.dart';
 import 'package:expense_tracker/widgets/pie_chart/pie_chart_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ExpensesPage extends StatefulWidget {
-  const ExpensesPage({super.key, required this.title});
-
-
-  final String title;
+  const ExpensesPage({super.key});
 
   @override
   State<ExpensesPage> createState() => _ExpensesPageState();
 }
 
 class _ExpensesPageState extends State<ExpensesPage> {
+
   final _scrollController = ScrollController();
   BottomNavItem _currentTab = BottomNavItem.expenses;
 
@@ -113,7 +111,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
     final map = <String, double>{};
     for (final e in _filteredAll) {
       final key =
-          _groupBy == GroupBy.category ? e.cathegory.name : e.paymentMethod.name;
+          _groupBy == GroupBy.category ? e.category.name : e.paymentMethod.name;
       map[key] = (map[key] ?? 0) + parseAmount(e.amount);
     }
     return map;
@@ -139,21 +137,22 @@ class _ExpensesPageState extends State<ExpensesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: ExpensesAppBar(onAddPressed: () {
-          // TODO: navegar a CreateExpense
-          // Navigator.push(...)
-        },
-      ),
-      body: CustomScrollView(
+    Currency currency = Currency.ars;
+
+    return CustomScrollView(
         controller: _scrollController,
         slivers: [
           SliverToBoxAdapter(
             child: ExpensesHeader(
               range: _range,
               groupBy: _groupBy,
+              currency: currency,
               onPickRange: _pickRange,
               onChangeGroupBy: (v) => setState(() => _groupBy = v),
+              onChangeCurrency: (c) {
+                setState(() => currency = c);
+                // más adelante: refrescar lista / recalcular pie
+              },
             ),
           ),
           SliverToBoxAdapter(
@@ -188,22 +187,35 @@ class _ExpensesPageState extends State<ExpensesPage> {
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: AppBottomNavBar(
-        current: _currentTab,
-        onTap: (tab) {
-          setState(() => _currentTab = tab);
-        },
-      ),
-    );
+      );
   }
 
   List<Expense> buildMockExpenses({int total = 60}) {
-  const categories = [
-    Cathegory(id: 1, name: 'Comida'),
-    Cathegory(id: 2, name: 'Transporte'),
-    Cathegory(id: 3, name: 'Salud'),
-    Cathegory(id: 4, name: 'Hogar'),
+  var categories = [
+   Category(
+    id: 1,
+    name: 'Comida',
+    iconCodePoint: Icons.restaurant.codePoint,
+    iconFontFamily: Icons.restaurant.fontFamily!,
+  ),
+  Category(
+    id: 2,
+    name: 'Transporte',
+    iconCodePoint: Icons.directions_bus.codePoint,
+    iconFontFamily: Icons.directions_bus.fontFamily!,
+  ),
+  Category(
+    id: 3,
+    name: 'Salud',
+    iconCodePoint: Icons.medical_services.codePoint,
+    iconFontFamily: Icons.medical_services.fontFamily!,
+  ),
+  Category(
+    id: 4,
+    name: 'Hogar',
+    iconCodePoint: Icons.home.codePoint,
+    iconFontFamily: Icons.home.fontFamily!,
+  ),
   ];
 
   const methods = [

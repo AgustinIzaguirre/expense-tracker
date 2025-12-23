@@ -8,7 +8,6 @@ class ExpenseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      //Expense expense = Expense("100", "Burger King", "Visa Credito", "Rappi",  "1/1/2025");
 
     return Card(
       child: Padding(
@@ -19,7 +18,11 @@ class ExpenseCard extends StatelessWidget {
             Row(
               children: [
                 CircleAvatar(
-                  child: Text(expense.cathegory.name.characters.first.toUpperCase()),
+                  backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                  child: Icon(
+                    expense.category.icon,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -42,7 +45,7 @@ class ExpenseCard extends StatelessWidget {
               spacing: 8,
               runSpacing: 8,
               children: [
-                Chip(label: Text(expense.cathegory.name)),
+                Chip(label: Text(expense.category.name)),
                 Chip(label: Text(expense.paymentMethod.name)),
                 Chip(label: Text(expense.currency)),
                 Chip(label: Text(_formatDate(expense.date))),

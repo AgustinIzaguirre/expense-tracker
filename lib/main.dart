@@ -1,22 +1,19 @@
-import 'dart:math';
 
-import 'package:expense_tracker/models/Expense.dart';
-import 'package:expense_tracker/models/cathegory.dart';
-import 'package:expense_tracker/models/group_by.dart';
-import 'package:expense_tracker/models/payment_method.dart';
-import 'package:expense_tracker/pages/expenses/expenses_page.dart';
-import 'package:expense_tracker/widgets/expense_card.dart';
-import 'package:expense_tracker/pages/expenses/expenses_header.dart';
-import 'package:expense_tracker/widgets/pie_chart/pie_chart_card.dart';
+import 'package:expense_tracker/data/seeds/isar_categories_seed.dart';
+import 'package:expense_tracker/infraestructure/isar_instance.dart';
+import 'package:expense_tracker/pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await IsarInstance.init();
+  await IsarCategorySeed.seedIfEmpty();
+
+  runApp(const ExpenseTrackerApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class ExpenseTrackerApp extends StatelessWidget {
+  const ExpenseTrackerApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -28,7 +25,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const ExpensesPage(title: 'Expense Tracker'),
+      home: const HomePage(),
     );
   }
 }
