@@ -32,4 +32,11 @@ class IsarCategoriesRepository {
       return isar.categorys.delete(id);
     });
   }
+
+  Future<int> update(Category category) async {
+    final isar = IsarInstance.isar;
+    return isar.writeTxn(() async {
+      return isar.categorys.put(category); // put = insert o update
+    });
+  }
 }

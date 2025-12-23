@@ -2,6 +2,7 @@ import 'package:expense_tracker/mappers/category_mapper.dart';
 import 'package:expense_tracker/models/category.dart';
 import 'package:expense_tracker/daos/category.dart' as dao;
 import 'package:expense_tracker/pages/categories/category_card.dart';
+import 'package:expense_tracker/pages/categories/edit_category_page.dart';
 import 'package:expense_tracker/repositories/isar_categories_repository.dart';
 import 'package:expense_tracker/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -105,9 +106,18 @@ class CategoriesPageState extends State<CategoriesPage> {
                 ),
                 child: CategoryCard(
                   category: c,
-                  onTap: () {
-                    // editar category
-                  },
+                  onTap: () async {
+                    final result = await Navigator.push<String>(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => EditCategoryPage(initial: c),
+                      ),
+                    );
+  
+                    if (result == 'updated' || result == 'deleted') {
+                      await refresh();
+                    }
+                  }
                 ),
               );
             },
