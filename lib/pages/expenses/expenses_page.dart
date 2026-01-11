@@ -218,12 +218,17 @@ class _ExpensesPageState extends State<ExpensesPage> {
   ),
   ];
 
-  const methods = [
-    PaymentMethod(id: 1, name: 'Efectivo'),
-    PaymentMethod(id: 2, name: 'Débito Visa'),
-    PaymentMethod(id: 3, name: 'Crédito Master Card'),
-    PaymentMethod(id: 3, name: 'Crédito Visa'),
-    PaymentMethod(id: 4, name: 'Mercado Pago'),
+  var methods = [
+    PaymentMethod(id: 1, name: 'Efectivo', iconCodePoint: Icons.restaurant.codePoint,
+    iconFontFamily: Icons.restaurant.fontFamily!),
+    PaymentMethod(id: 2, name: 'Débito Visa', iconCodePoint: Icons.restaurant.codePoint,
+    iconFontFamily: Icons.restaurant.fontFamily!),
+    PaymentMethod(id: 3, name: 'Crédito Master Card', iconCodePoint: Icons.restaurant.codePoint,
+    iconFontFamily: Icons.restaurant.fontFamily!),
+    PaymentMethod(id: 3, name: 'Crédito Visa', iconCodePoint: Icons.restaurant.codePoint,
+    iconFontFamily: Icons.restaurant.fontFamily!),
+    PaymentMethod(id: 4, name: 'Mercado Pago', iconCodePoint: Icons.restaurant.codePoint,
+    iconFontFamily: Icons.restaurant.fontFamily!),
   ];
 
   final now = DateTime.now();
