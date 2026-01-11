@@ -1,8 +1,10 @@
 
+import 'package:expense_tracker/models/payment_method.dart';
 import 'package:expense_tracker/models/category.dart';
 import 'package:expense_tracker/models/currency.dart';
 import 'package:expense_tracker/pages/categories/categories_page.dart';
 import 'package:expense_tracker/pages/categories/create_category_page.dart';
+import 'package:expense_tracker/pages/payment_methods/create_payment_method_page.dart';
 import 'package:expense_tracker/pages/payment_methods/payment_methods_page.dart';
 import 'package:expense_tracker/widgets/bottom_nav_bar.dart';
 import 'package:expense_tracker/widgets/expense_tracker_app_bar.dart';
@@ -29,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   
   BottomNavItem _currentTab = BottomNavItem.expenses;
   final GlobalKey<CategoriesPageState> _categoriesKey = GlobalKey<CategoriesPageState>();
-
+  final GlobalKey<PaymentMethodsPageState> _paymentMethodsKey = GlobalKey<PaymentMethodsPageState>();
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,7 @@ class _HomePageState extends State<HomePage> {
       case BottomNavItem.expenses:
         return const ExpensesPage();
       case BottomNavItem.paymentMethods:
-        return const PaymentMethodsPage();
+        return PaymentMethodsPage(key: _paymentMethodsKey);
       case BottomNavItem.categories:
         return CategoriesPage(key: _categoriesKey);
     }
@@ -77,6 +79,22 @@ class _HomePageState extends State<HomePage> {
     debugPrint('Nueva categoría creada: ${created.name}');
   }
 
+  Future<void> _openCreatePaymentMethod() async {
+    final created = await Navigator.push<PaymentMethod>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const CreatePaymentMethodPage(),
+      ),
+    );
+    
+    _paymentMethodsKey.currentState?.refresh();
+
+    if (created == null) return;
+
+    
+    debugPrint('Nueva categoría creada: ${created.name}');
+  }
+
   PreferredSizeWidget _buildAppBar() {
     switch (_currentTab) {
       case BottomNavItem.expenses:
@@ -88,10 +106,7 @@ class _HomePageState extends State<HomePage> {
           tooltip: EXPENSES_TOOLTIP,
         );
       case BottomNavItem.paymentMethods:
-        return  ExpenseTrackerAppBar(onAddPressed: () {
-            // TODO: navegar a CreateExpense
-            // Navigator.push(...)
-          },
+        return  ExpenseTrackerAppBar(onAddPressed: _openCreatePaymentMethod,
           title: PAYMENT_METHODS_TITLE,
           tooltip: PAYMENT_METHODS_TOOLTIP,
         );
