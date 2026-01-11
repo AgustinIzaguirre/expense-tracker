@@ -1,5 +1,6 @@
 import 'package:expense_tracker/mappers/payment_method_mapper.dart';
 import 'package:expense_tracker/models/payment_method.dart';
+import 'package:expense_tracker/pages/payment_methods/edit_payment_method_page.dart';
 import 'package:expense_tracker/pages/payment_methods/payment_method_card.dart';
 import 'package:expense_tracker/repositories/isar_payment_method_repository.dart';
 import 'package:expense_tracker/widgets/bottom_nav_bar.dart';
@@ -107,17 +108,16 @@ class PaymentMethodsPageState extends State<PaymentMethodsPage> {
                 child: PaymentMethodCard(
                   paymentMethod: paymentMethod,
                   onTap: () async {
-                    //final result = await Navigator.push<String>(
-                      //context,
-                      //MaterialPageRoute(
-                        //builder: (_) => EditCategoryPage(initial: paymentMethod),
-                      //),
-                      //TODO
-                   // );
+                    final result = await Navigator.push<String>(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => EditPaymentMethodPage(initial: paymentMethod),
+                      ),
+                    );
   
-                    //if (result == 'updated' || result == 'deleted') {
-                      //await refresh();
-                    //}
+                    if (result == 'updated' || result == 'deleted') {
+                      await refresh();
+                    }
                   }
                 ),
               );
